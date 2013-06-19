@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Grimlock Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+
+    <!--[if lt IE 9]>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="hero-unit">
+            Holla, papi.
+        </div>
+    </div>
+
+
+    <!-- build:js scripts/scripts.js -->
+    <!--script src="scripts/vendor/angular.js"></script-->
+    <!-- endbuild -->
+    <script>
+        window.TMCD_IS_LINKEDIN_LOADED = false;
+        window.tmcdConfirmLinkedInLoaded = function() {
+          TMCD_IS_LINKEDIN_LOADED = true;
+        }
+    </script>
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+        api_key: 0m2ewzmu2sn7
+        onLoad: tmcdConfirmLinkedInLoaded
+        authorize: true
+    </script>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+        // var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        // (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        // g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        // s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+
+    <!-- build:js scripts/main.js -->
+    <script data-main="scripts/main" src="components/requirejs/require.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
