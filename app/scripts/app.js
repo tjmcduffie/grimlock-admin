@@ -1,9 +1,13 @@
 /*global define, TMCD_IS_LINKEDIN_LOADED */
-define(['linked-in-adapter'], function(IN) {
+define(['linked-in-adapter', 'router'], function(IN, router) {
   'use strict';
-  var app = app || {};
+  var app = {};
 
   var linkedInLoadedTimeOut_;
+
+  app.user = null;
+
+  app.router = router;
 
   app.uri = {
     home: '/index.html',
@@ -25,14 +29,14 @@ define(['linked-in-adapter'], function(IN) {
     }
 
     clearTimeout(linkedInLoadedTimeOut_);
-    app.getUser();
+    app.authenticateOrRedirect_();
   };
 
   app.checkLinkedInApiStatus_ = function() {
     return TMCD_IS_LINKEDIN_LOADED;
   };
 
-  app.getUser = function() {
+  app.authenticateOrRedirect_ = function() {
     var signinUrl = app.uri.rootUrl + app.uri.signin;
 
     if (!IN.isAuthorized()) {
@@ -47,6 +51,7 @@ define(['linked-in-adapter'], function(IN) {
       }
       IN.getUser().then(function(data) {
         console.log('USER:', data);
+        app.user = data;
       });
     });
   };
