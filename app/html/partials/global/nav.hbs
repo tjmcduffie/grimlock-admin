@@ -1,0 +1,8 @@
+<div par-cnt-view contentId="{{contentId}}"></div>
+<nav>
+  <ul>
+    {{#each nav.links}}
+    <li><a {{#if nav.isCurrent}}class="current"{{/if}} href="#{{this.hash}}">{{this.name}}</a></li>
+    {{/each}}
+  </ul>
+</nav>

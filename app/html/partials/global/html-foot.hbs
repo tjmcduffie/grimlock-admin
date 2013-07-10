@@ -1,0 +1,27 @@
+      {{> footer}}
+    </div>
+    <script>
+      window.IN = false;
+      window.TMCD_IS_LINKEDIN_LOADED = false;
+      window.tmcdConfirmLinkedInLoaded = function() {
+        TMCD_IS_LINKEDIN_LOADED = true;
+      }
+    </script>
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key: 0m2ewzmu2sn7
+      onLoad: tmcdConfirmLinkedInLoaded
+      authorize: true
+    </script>
+    <script>
+      console.log(IN);
+    </script>
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    {{#is environment 'dev'}}
+    <script src="http://localhost:35729/livereload.js"></script>
+    {{/is}}
+    <p>foo</p>
+    <script data-main="js/main" src="js/lib/requirejs/require.js"></script>
+  </body>
+</html>

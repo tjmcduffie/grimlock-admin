@@ -1,0 +1,18 @@
+{
+  "links": [
+    {
+      "name": "Home",
+      "hash": "home"
+    },
+    {
+      "name": "Sync",
+      "hash": "sync"
+    },
+    {
+      "name": "Profile",
+      "hash": "profile"
+    }
+  ],
+  "show": "true",
+  "current": false
+}

@@ -1,4 +1,11 @@
 /*global define, IN */
+/**
+ * @fileoverview LinkedIn Adapter. Provides the interface between the
+ *               application and the LinkedIn API.
+ *
+ * @author timothy.mcduffie@gmail.com (Tim McDuffie)
+ */
+
 define([], function () {
   'use strict';
 
