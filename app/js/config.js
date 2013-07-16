@@ -4,6 +4,7 @@ require.config({
   paths: {
     'jquery': 'lib/jquery/jquery',
     'framework': 'lib/knockout/knockout-latest',
+    'handlebars': 'lib/handlebars/handlebars',
     'router': 'lib/sammy/sammy'
   },
 
@@ -11,6 +12,9 @@ require.config({
     'router': {
       deps: ['jquery'],
       exports: 'Sammy'
+    },
+    'handlebars': {
+      exports: 'Handlebars'
     }
   }
 });

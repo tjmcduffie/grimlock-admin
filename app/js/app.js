@@ -5,7 +5,7 @@
  * @author timothy.mcduffie@gmail.com (Tim McDuffie)
  */
 
-define(['linked-in-adapter', 'router'], function(IN, router) {
+define(['linked-in-adapter', 'router', 'templates'], function(IN, router, tpl) {
   'use strict';
 
   var Application = function() {
@@ -26,6 +26,8 @@ define(['linked-in-adapter', 'router'], function(IN, router) {
   };
 
   Application.prototype.data = {};
+
+  Application.prototype.tpl = tpl;
 
   Application.prototype.init_ = function() {
     if (!this.checkLinkedInApiStatus_()) {

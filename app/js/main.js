@@ -4,5 +4,6 @@
 define(['config', 'app'], function(c, App) {
   'use strict';
 
-  new App();
+  var app = new App();
+  console.log(app);
 });

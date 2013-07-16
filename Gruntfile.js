@@ -1,7 +1,5 @@
 'use strict';
 
-var path = require('path');
-
 module.exports = function(grunt) {
 
   // Load all grunt-related tasks
@@ -12,6 +10,7 @@ module.exports = function(grunt) {
     app: 'app',
     dist: 'dist',
     docs: 'docs',
+    hbsTemplatePath: '/html/partials/templates/',
     temp: 'temp',
     test: 'test',
     vendor: 'components',
@@ -140,7 +139,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '<%= yeoman.vendor %>',
             src: [
-              '*/{require,modernizr}.js',
+              '*/{require,modernizr,handlebars}.js',
               '*/jquery.*js'
             ],
             dest: '<%= yeoman.temp %>/js/lib'
@@ -182,6 +181,20 @@ module.exports = function(grunt) {
           css: [],
           extras: []
         }
+      }
+    },
+    handlebars: {
+      partials: {
+        options: {
+          amd: true,
+          namespace: 'tmpl',
+          processName: function(filename) {
+            var regex = /(app\/html\/partials\/templates\/)(.*)\.hbs/;
+            return filename.replace(regex, "$2")
+          }
+        },
+        src: ['<%= yeoman.app %><%= yeoman.hbsTemplatePath %>*.hbs'],
+        dest: '<%= yeoman.temp %>/js/templates.js'
       }
     },
     open: {
@@ -232,6 +245,10 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/html/**/*.{hbs,json}'
         ],
         tasks: ['assemble']
+      },
+      handlebars: {
+        files: ['<%= yeoman.app %>/js/html/templates/*.hbs'],
+        task: ['handlebars']
       }
     }
   });
@@ -278,6 +295,7 @@ module.exports = function(grunt) {
       'clean:build',
       'compass',
       'assemble',
+      'handlebars',
       'copy:dev',
       'connect:livereload',
       'open',
