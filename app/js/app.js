@@ -5,10 +5,11 @@
  * @author timothy.mcduffie@gmail.com (Tim McDuffie)
  */
 
-define(['linked-in-adapter', 'router', 'config'], function(IN, router) {
+define(['linked-in-adapter', 'router'], function(IN, router) {
   'use strict';
 
   var Application = function() {
+    this.init_ = this.init_.bind(this);
     this.init_();
   };
 
@@ -24,15 +25,11 @@ define(['linked-in-adapter', 'router', 'config'], function(IN, router) {
     }())
   };
 
-  Application.prototype.user = null;
+  Application.prototype.data = {};
 
   Application.prototype.init_ = function() {
-    var cb = this.init_.bind();
     if (!this.checkLinkedInApiStatus_()) {
-      this.linkedInLoadedTimeOut_ = setTimeout(function() {
-        app.init_();
-        return;
-      }, 5);
+      this.linkedInLoadedTimeOut_ = setTimeout(this.init_, 5);
       return;
     }
 
@@ -46,6 +43,7 @@ define(['linked-in-adapter', 'router', 'config'], function(IN, router) {
 
   Application.prototype.authenticateOrRedirect_ = function() {
     var signinUrl = this.uri.rootUrl + this.uri.signin;
+    var setUserData = this.setUserData_.bind(this);
 
     if (!IN.isAuthorized()) {
       if (window.location.href !== signinUrl) {
@@ -58,10 +56,19 @@ define(['linked-in-adapter', 'router', 'config'], function(IN, router) {
         window.location = this.uri.rootUrl + this.uri.home;
       }
       IN.getUser().then(function(data) {
-        console.log('USER:', data);
-        this.user = data;
+        if (data.values && data.values[0]) {
+          setUserData(data);
+          console.log('USER:', data.values[0]);
+        } else {
+          throw new Error("unexpected data format from IN API")
+        }
       });
     });
+  };
+
+  Application.prototype.setUserData_ = function(data) {
+    this.data.user = data;
+    console.log(this.data);
   };
 
   return Application;
