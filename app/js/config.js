@@ -5,6 +5,13 @@ require.config({
     'jquery': 'lib/jquery/jquery',
     'framework': 'lib/knockout/knockout-latest',
     'router': 'lib/sammy/sammy'
+  },
+
+  shim: {
+    'router': {
+      deps: ['jquery'],
+      exports: 'Sammy'
+    }
   }
 });
 
