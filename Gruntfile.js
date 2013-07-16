@@ -2,10 +2,6 @@
 
 var path = require('path');
 
-var mountFolder = function(connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
-
 module.exports = function(grunt) {
 
   // Load all grunt-related tasks
@@ -87,7 +83,7 @@ module.exports = function(grunt) {
       dist: {
         src: ['components/requirejs/require.js', '<%= concat.dist.dest %>'],
         dest: 'dist/require.js'
-      },
+      }
     },
     connect: {
       options: {
@@ -117,8 +113,6 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
-              // mountFolder(connect, yeomanConfig.temp),
-              // mountFolder(connect, yeomanConfig.app),
               connect.static(yeomanConfig.temp),
               connect.static(yeomanConfig.app),
               connect.directory(yeomanConfig.temp)
@@ -165,10 +159,10 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '<%= yeoman.app %>',
             src: [
-              'js/{,*/}*.js',
+              'js/{,*/}*.js'
             ],
             dest: '<%= yeoman.dist %>'
-          },
+          }
         ]
       }
     },
@@ -215,7 +209,7 @@ module.exports = function(grunt) {
       dist: {
         src: '<%= concat.dist.dest %>',
         dest: 'dist/require.min.js'
-      },
+      }
     },
     watch: {
       compass: {
@@ -235,16 +229,10 @@ module.exports = function(grunt) {
       },
       assemble: {
         files: [
-          '<%= yeoman.app %>/html/**/*'
+          '<%= yeoman.app %>/html/**/*.{hbs,json}'
         ],
         tasks: ['assemble']
-      },
-      copy: {
-        files: [
-          '<%= yeoman.app %>/components/**/*'
-        ],
-        tasks: ['copy:dev']
-      },
+      }
     }
   });
 
