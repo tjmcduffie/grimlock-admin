@@ -1,9 +1,8 @@
 // to depend on a bower installed component:
 // define(['component/componentName/file'])
 
-define(['config', 'app'], function(c, App) {
-  'use strict';
+define(['config', 'app', 'routes'], function(c, app, routes) {
 
-  var app = new App();
-  console.log(app);
+  window.app = app;
+  app.init();
 });

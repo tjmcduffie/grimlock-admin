@@ -6,32 +6,28 @@
  */
 
 define(['linked-in-adapter', 'router', 'templates'], function(IN, router, tpl) {
-  'use strict';
 
   var Application = function() {
-    this.init_ = this.init_.bind(this);
-    this.init_();
+    this.init = this.init.bind(this);
   };
 
   Application.prototype.linkedInLoadedTimeOut_ = null;
 
-  Application.prototype.router = router;
+  Application.prototype.router = router();
 
   Application.prototype.uri = {
-    home: '/home',
-    signin: '/signin',
-    rootUrl: (function() {
-      return window.location.protocol + '//' + window.location.host;
-    }())
+    home: '#/home',
+    signin: '#/signin',
+    root: '#/'
   };
 
   Application.prototype.data = {};
 
   Application.prototype.tpl = tpl;
 
-  Application.prototype.init_ = function() {
+  Application.prototype.init = function() {
     if (!this.checkLinkedInApiStatus_()) {
-      this.linkedInLoadedTimeOut_ = setTimeout(this.init_, 5);
+      this.linkedInLoadedTimeOut_ = setTimeout(this.init, 5);
       return;
     }
 
@@ -46,6 +42,8 @@ define(['linked-in-adapter', 'router', 'templates'], function(IN, router, tpl) {
   Application.prototype.authenticateOrRedirect_ = function() {
     var signinUrl = this.uri.rootUrl + this.uri.signin;
     var setUserData = this.setUserData_.bind(this);
+
+    this.router.run(this.uri.root);
 
     if (!IN.isAuthorized()) {
       if (window.location.href !== signinUrl) {
@@ -73,6 +71,6 @@ define(['linked-in-adapter', 'router', 'templates'], function(IN, router, tpl) {
     console.log(this.data);
   };
 
-  return Application;
+  return new Application();
 
 });

@@ -1,6 +1,6 @@
 /*global define */
 define([], function() {
-  'use strict';
+
   /**
    * A native implementation of bind.
    * @param {Function} fn A function to partially apply.
