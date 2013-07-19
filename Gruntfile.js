@@ -14,7 +14,10 @@ module.exports = function(grunt) {
     temp: 'temp',
     test: 'test',
     vendor: 'components',
-    port: 8000
+    port: {
+      connect: 8000,
+      livereload: 35728
+    }
   };
 
   // Project configuration.
@@ -86,7 +89,7 @@ module.exports = function(grunt) {
     },
     connect: {
       options: {
-        port: yeomanConfig.port,
+        port: yeomanConfig.port.connect,
         hostname: 'localhost'
       },
       development: {
@@ -231,7 +234,7 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          livereload: true
+          livereload: yeomanConfig.port.livereload
         },
         files: [
           '<%= yeoman.temp %>/{,*/}*.html',
