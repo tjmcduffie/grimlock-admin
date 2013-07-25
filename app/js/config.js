@@ -3,7 +3,7 @@ require.config({
   // expose jquery
   paths: {
     'jquery': 'lib/jquery/jquery',
-    'framework': 'lib/knockout/knockout-latest',
+    'ko': 'lib/knockout/knockout-latest',
     'handlebars': 'lib/handlebars/handlebars',
     'router': 'lib/sammy/sammy'
   },

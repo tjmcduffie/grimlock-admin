@@ -1,41 +1,21 @@
-@import "compass/css3/box-shadow"
-$headerheight: 46px
-
-body
-  background-color: lightgrey
-  padding-bottom: $headerheight
-
-.container
-  background-color: white
-  border: 20px solid white
-  border-top: 0px
-  @include box-shadow(#444 0px 0px 25px)
-  padding-top: $headerheight
-  position: relative
+@import "config"
 
 header
   background-color: black
   color: white
   height: $headerheight
-  position: fixed
-  top: 0
-  width: inherit
   z-index: 5
   &:before
     background-color: black
     @include box-shadow(#444 0px 0px 15px)
     content: " "
     height: $headerheight
-    left: 0
-    position: fixed
-    right: 0
-    top: 0
     z-index: -1
   h1, nav
     display: inline-block
     font-size: 16px
     line-height: 1.6em
-    margin: 6px 20px
+    margin: 6px 20px 0px
     vertical-align: middle
-  .nav
-    margin-bottom: 0px
+    .nav
+      margin-bottom: 0

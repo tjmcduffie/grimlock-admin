@@ -2,10 +2,15 @@
 // define(['component/componentName/file'])
 
 define([
-    'viewmodels/error',    'viewmodels/signin',     'viewmodels/home'
+    'viewmodels/root',
+    'viewmodels/linkedin',
+    // 'viewmodels/error',    'viewmodels/signin',
   ], function() {
 
-  Array.prototype.forEach.call(arguments, function(ViewModel) {
-    var vm = new ViewModel();
-  });
+  return function() {
+    Array.prototype.forEach.call(arguments, function(ViewModel) {
+      console.log(ViewModel.prototype.constructor.name)
+      var vm = new ViewModel();
+    });
+  }
 });

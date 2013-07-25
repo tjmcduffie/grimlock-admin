@@ -5,8 +5,15 @@
  * @author timothy.mcduffie@gmail.com (Tim McDuffie)
  */
 
-define(['linked-in-adapter', 'router', 'templates'], function(IN, router, tpl) {
+define(function(require) {
 
+  /** requirements */
+  var IN = require('grimlock/linkedin');
+  var router = require('router');
+  var tpl = require('templates');
+  var ko = require('ko');
+
+  /** provision */
   var Application = function() {
     this.init = this.init.bind(this);
   };
@@ -33,6 +40,19 @@ define(['linked-in-adapter', 'router', 'templates'], function(IN, router, tpl) {
 
     clearTimeout(this.linkedInLoadedTimeOut_);
     this.authenticateOrRedirect_();
+  };
+
+  Application.prototype.watch = function(prop, thisObj) {
+    if (typeof prop !== 'function' && !Array.isArray(prop)) {
+      // not a function or array
+      return ko.observable(prop);
+    } else if (Array.isArray(prop)) {
+      // array
+      return ko.observableArray(prop);
+    } else {
+      // function
+      return ko.computed(prop, thisObj);
+    }
   };
 
   Application.prototype.checkLinkedInApiStatus_ = function() {

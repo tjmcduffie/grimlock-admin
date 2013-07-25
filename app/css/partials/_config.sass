@@ -1,0 +1,19 @@
+/** imports **/
+@import "compass/css3/box-shadow"
+@import "compass/css3/box-sizing"
+
+/** vars **/
+$headerheight: 46px
+$contentwidth: 900px
+
+/** mixins **/
+@mixin container-layout
+  max-width: $contentwidth
+  min-width: $contentwidth
+  margin-left: auto
+  margin-right: auto
+
+@mixin fixed-fill-width
+  left: 0
+  position: fixed
+  right: 0

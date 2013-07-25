@@ -1,8 +1,14 @@
 // to depend on a bower installed component:
 // define(['component/componentName/file'])
 
-define(['config', 'app', 'routes'], function(c, app, routes) {
+define(function(require) {
 
+  /** requirements */
+  var c = require('config');
+  var app = require('grimlock/app');
+  var routes = require('routes');
+
+  /** provision */
   window.app = app;
-  app.init();
+  //app.init();
 });

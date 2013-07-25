@@ -1,5 +1,5 @@
 /*global define */
-define(['app', 'ViewModel', 'util'], function(app, ViewModel, util) {
+define(['grimlock/app', 'viewmodels/ViewModel', 'grimlock/util'], function(app, ViewModel, util) {
 
   var ErrorViewModel = function() {
     util.base(this);
