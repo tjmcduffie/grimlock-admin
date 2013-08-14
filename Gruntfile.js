@@ -41,12 +41,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
-    // Task configuration.
     clean: {
       files: [yeomanConfig.dist],
       docs: [yeomanConfig.docs],
@@ -74,16 +68,21 @@ module.exports = function(grunt) {
         }
       }
     },
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
-      dist: {
-        src: ['components/requirejs/require.js', '<%= concat.dist.dest %>'],
-        dest: 'dist/require.js'
-      }
-    },
+    // concat: {
+    //   options: {
+    //     banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+    //             '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+    //             '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+    //             '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
+    //             '<%= pkg.author.name %>; Licensed ' +
+    //             '<%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+    //     stripBanners: true
+    //   },
+    //   dist: {
+    //     src: ['components/requirejs/require.js', '<%= concat.dist.dest %>'],
+    //     dest: 'dist/require.js'
+    //   }
+    // },
     connect: {
       options: {
         port: yeomanConfig.port,
@@ -242,12 +241,12 @@ module.exports = function(grunt) {
       },
       assemble: {
         files: [
-          '<%= yeoman.app %>/html/**/*.{hbs,json}'
+          '<%= yeoman.app %>/html/{pages,data}/*.{hbs,json}'
         ],
         tasks: ['assemble']
       },
       handlebars: {
-        files: ['<%= yeoman.app %>/js/html/templates/*.hbs'],
+        files: ['<%= yeoman.app %>/html/templates/*.hbs'],
         task: ['handlebars']
       }
     }

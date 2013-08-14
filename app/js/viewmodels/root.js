@@ -3,26 +3,25 @@ define(function(require) {
 
   /** requirements */
   var app = require('grimlock/app');
-  var util = require('grimlock/util');
-  var ViewModel = require('viewmodels/viewmodel');
+  var ko = require('lib/ko');
+  var SiteModel = require('models/site');
+  var UserModel = require('models/user');
+  var ViewModel = require('grimlock/viewmodel');
 
   /** provision */
-  function RootViewModel() {
-    this.model.site = {
-      title: app.watch('Grimlock Admin'),
-      copyright: app.watch('&copy; ' + new Date().getFullYear())
-    };
+  var RootViewModel = function RootViewModel() {
+    this.model.site = app.watch(new SiteModel());
+    this.model.user = app.watch(new UserModel());
     this.model.profile = {
       url: app.watch("#")
     };
-    util.base(this);
+    app.base(this);
     this.init();
   };
-  util.inherits(RootViewModel, ViewModel);
+  app.inherits(RootViewModel, ViewModel);
 
   RootViewModel.prototype.init = function(context) {
-    console.log('initializing');
-    util.base(this, 'init', context);
+    app.base(this, 'init', context);
   };
 
   return RootViewModel;

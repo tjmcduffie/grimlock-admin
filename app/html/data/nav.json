@@ -2,15 +2,15 @@
   "links": [
     {
       "name": "Home",
-      "hash": "home"
+      "hash": "/"
     },
     {
       "name": "Sync",
-      "hash": "sync"
+      "hash": "/sync"
     },
     {
       "name": "Profile",
-      "hash": "profile"
+      "hash": "/profile"
     }
   ],
   "show": "true",

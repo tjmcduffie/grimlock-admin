@@ -1,10 +1,15 @@
 /*global define */
-define(['grimlock/app', 'viewmodels/ViewModel', 'grimlock/util'], function(app, ViewModel, util) {
+define(function(require) {
 
+  /** requirements */
+  var app = require('grimlock/app');
+  var ViewModel = require('grimlock/viewmodel');
+
+  /** provision */
   var SigninViewModel = function() {
-    util.base(this);
+    app.base(this);
   };
-  util.inherits(SigninViewModel, ViewModel);
+  app.inherits(SigninViewModel, ViewModel);
 
   SigninViewModel.prototype.method = 'get';
 
@@ -12,7 +17,7 @@ define(['grimlock/app', 'viewmodels/ViewModel', 'grimlock/util'], function(app, 
 
   SigninViewModel.prototype.init = function(context) {
     console.log('initializing');
-    util.base(this, 'init', context);
+    app.base(this, 'init', context);
   };
 
   return SigninViewModel;

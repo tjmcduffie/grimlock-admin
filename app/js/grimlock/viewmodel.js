@@ -3,10 +3,9 @@ define(function(require) {
 
   /** requirements */
   var app = require('grimlock/app');
-  var ko = require('ko');
+  var ko = require('lib/ko');
 
   /** provision */
-
   var ViewModel = function() {
     this.setRoute_();
     ko.applyBindings(this.model);
@@ -32,8 +31,8 @@ define(function(require) {
   };
 
   ViewModel.prototype.init = function(context) {
-    console.log('starting');
-    console.log('Sammy context:', context);
+    console.log('initializing', this.constructor.name);
+    ko.applyBindings(this.model);
   };
 
   return ViewModel;

@@ -4,19 +4,24 @@
  *
  * @author timothy.mcduffie@gmail.com (Tim McDuffie)
  */
-define([], function() {
-  'use strict';
+define(function(require) {
 
-  window._gaq=[
-    ['_setAccount','UA-XXXXX-X'],
-    ['_trackPageview']
-  ];
-  (function(d,t) {
-    var g = d.createElement(t);
-    var s = d.getElementsByTagName(t)[0];
+  var config = require('appconfig');
 
-    g.src = ('https:' == location.protocol ? '//ssl' : '//www') +
-      '.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s);
-  }(document,'script'));
+  return {
+    attach: function() {
+      window._gaq=[
+        ['_setAccount',config.Analytics.UAID],
+        ['_trackPageview']
+      ];
+      (function(d,t) {
+        var g = d.createElement(t);
+        var s = d.getElementsByTagName(t)[0];
+
+        g.src = ('https:' == location.protocol ? '//ssl' : '//www') +
+          '.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s);
+      }(document,'script'));
+    }
+  };
 });

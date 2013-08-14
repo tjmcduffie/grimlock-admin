@@ -2,19 +2,27 @@ require.config({
   // make components more sensible
   // expose jquery
   paths: {
-    'jquery': 'lib/jquery/jquery',
-    'ko': 'lib/knockout/knockout-latest',
-    'handlebars': 'lib/handlebars/handlebars',
-    'router': 'lib/sammy/sammy'
+    'lib/jquery': 'lib/jquery/jquery',
+    'lib/ko': 'lib/knockout/knockout-latest',
+    // 'lib/handlebars': 'lib/handlebars/handlebars',
+    'handlebars': 'lib/handlebars/handlebars', // keep this for the templates file
+    'lib/router': 'lib/sammy/sammy',
+    'api/linkedin': 'http://platform.linkedin.com/in.js?async=true'
   },
 
   shim: {
-    'router': {
-      deps: ['jquery'],
+    'lib/router': {
+      deps: ['lib/jquery'],
       exports: 'Sammy'
+    },
+    'lib/jquery': {
+      exports: 'jQuery'
     },
     'handlebars': {
       exports: 'Handlebars'
+    },
+    'api/linkedin': {
+      exports: 'IN'
     }
   }
 });
@@ -24,10 +32,28 @@ require.config({
 // require.config({}) found in this file
 require.config({
   paths: {
-    'knockout': 'lib/knockout-latest.debug'
+    'lib/ko': 'lib/knockout/knockout-latest.debug'
   }
 });
 
-if (!window.requireTestMode) {
-  require(['main'], function(){ });
-}
+define('appconfig', ['lib/router'], function(router) {
+  return {
+    Analytics: {
+      UAID: 'UA-XXXXX-X'
+    },
+    IN: {
+      API_KEY: '0m2ewzmu2sn7',
+      AUTHORIZE: true
+    },
+    route: {
+      methods: {
+        DELETE: router.del,
+        GET: router.get,
+        POST: router.post,
+        PUT: router.pot,
+        UPDATE: router.update
+      },
+      root: '#/'
+    }
+  };
+});

@@ -1,18 +1,23 @@
-/*global define */
-define(['grimlock/app', 'viewmodels/ViewModel', 'grimlock/util'], function(app, ViewModel, util) {
+/*global define, window */
+define(function(require) {
 
-  var HomeViewModel = function() {
-    util.base(this);
+  /** requirements */
+  var app = require('grimlock/app');
+  var ViewModel = require('grimlock/viewmodel');
+
+  /** provision */
+  var HomeViewModel = function HomeViewModel() {
+    app.base(this);
   };
-  util.inherits(HomeViewModel, ViewModel);
+  app.inherits(HomeViewModel, ViewModel);
 
   HomeViewModel.prototype.method = 'get';
 
   HomeViewModel.prototype.path = '/';
 
   HomeViewModel.prototype.init = function(context) {
-    console.log('initializing');
-    util.base(this, 'init', context);
+    app.renderView(app.tmpl.home);
+    app.base(this, 'init', context);
   };
 
   return HomeViewModel;
