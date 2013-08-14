@@ -1,0 +1,24 @@
+@import "config"
+
+*
+  @include box-sizing(border-box)
+
+body
+  background-color: lightgrey
+
+.container
+  @include container-layout
+
+header
+  position: fixed
+  top: 0
+  width: inherit
+  &:before
+    @include fixed-fill-width
+    top: 0
+
+main
+  @include container-layout
+
+footer
+  @include container-layout

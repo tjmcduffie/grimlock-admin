@@ -1,0 +1,21 @@
+@import "config"
+
+header
+  background-color: black
+  color: white
+  height: $headerheight
+  z-index: 5
+  &:before
+    background-color: black
+    @include box-shadow(#444 0px 0px 15px)
+    content: " "
+    height: $headerheight
+    z-index: -1
+  h1, nav
+    display: inline-block
+    font-size: 16px
+    line-height: 1.6em
+    margin: 6px 20px 0px
+    vertical-align: middle
+    .nav
+      margin-bottom: 0
