@@ -2,41 +2,27 @@ require.config({
   // make components more sensible
   // expose jquery
   paths: {
-    'lib/jquery': 'lib/jquery/jquery',
-    'lib/ko': 'lib/knockout/knockout-latest',
-    // 'lib/handlebars': 'lib/handlebars/handlebars',
-    'handlebars': 'lib/handlebars/handlebars', // keep this for the templates file
-    'lib/router': 'lib/sammy/sammy',
-    'api/linkedin': 'http://platform.linkedin.com/in.js?async=true'
+    'jquery': 'lib/jquery/jquery',
+    'ko': 'lib/knockout/knockout-latest',
+    'sammy': 'lib/sammy/sammy',
+    'linkedinapi': 'http://platform.linkedin.com/in.js?async=true'
   },
 
   shim: {
-    'lib/router': {
-      deps: ['lib/jquery'],
+    'sammy': {
+      deps: ['jquery'],
       exports: 'Sammy'
     },
-    'lib/jquery': {
+    'jquery': {
       exports: 'jQuery'
     },
-    'handlebars': {
-      exports: 'Handlebars'
-    },
-    'api/linkedin': {
+    'linkedinapi': {
       exports: 'IN'
     }
   }
 });
 
-// Use the debug version of knockout it development only
-// When compiling with grunt require js will only look at the first
-// require.config({}) found in this file
-require.config({
-  paths: {
-    'lib/ko': 'lib/knockout/knockout-latest.debug'
-  }
-});
-
-define('appconfig', ['lib/router'], function(router) {
+define('appconfig', [], function() {
   return {
     Analytics: {
       UAID: 'UA-XXXXX-X'
@@ -46,14 +32,16 @@ define('appconfig', ['lib/router'], function(router) {
       AUTHORIZE: true
     },
     route: {
-      methods: {
-        DELETE: router.del,
-        GET: router.get,
-        POST: router.post,
-        PUT: router.pot,
-        UPDATE: router.update
-      },
       root: '#/'
     }
   };
+});
+
+// Use the debug version of knockout it development only
+// When compiling with grunt require js will only look at the first
+// require.config({}) found in this file
+require.config({
+  paths: {
+    'ko': 'lib/knockout/knockout-latest.debug'
+  }
 });
