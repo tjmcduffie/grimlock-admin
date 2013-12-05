@@ -1,20 +1,23 @@
-// to depend on a bower installed component:
-// define(['component/componentName/file'])
+/*global define */
+/**
+ * @fileoverview Collection of routes to enable in the application. This should
+ *     be moved to a Grunt task for auto generation similar to the templates
+ *     file.
+ */
 
 define([
-    'viewmodels/root',
-    'viewmodels/home',
-    'viewmodels/sync',
-    // 'viewmodels/error',    'viewmodels/signin',
-  ], function(a, b) {
+    'grimlock/routes/route-before',
+    'grimlock/routes/route-after',
+    'grimlock/routes/root',
+    'grimlock/routes/home',
+    'grimlock/routes/sync',
+    'grimlock/routes/profile',
+    'grimlock/routes/sign-in',
+    'grimlock/routes/welcome',
+    'grimlock/routes/error'
+  ], function() {
 
   var routes = arguments;
 
-  return {
-    register: function() {
-      Array.prototype.forEach.call(routes, function(ViewModel) {
-        new ViewModel();
-      });
-    }
-  }
+  return routes;
 });

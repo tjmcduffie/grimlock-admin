@@ -2,7 +2,7 @@
   "links": [
     {
       "name": "Home",
-      "hash": "/"
+      "hash": "/home"
     },
     {
       "name": "Sync",

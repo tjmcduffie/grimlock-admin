@@ -1,24 +1,29 @@
-/*global define, window */
+/*global define */
+/**
+ * @fileoverview Home route.
+ */
+
 define(function(require) {
 
   /** requirements */
-  var app = require('grimlock/app');
-  var ViewModel = require('grimlock/viewmodel');
+  var UserModel = require('grimlock/models/user');
+  var system = require('grimlock/system');
 
-  /** provision */
-  var HomeViewModel = function HomeViewModel() {
-    app.base(this);
-  };
-  app.inherits(HomeViewModel, ViewModel);
 
-  HomeViewModel.prototype.method = 'get';
 
-  HomeViewModel.prototype.path = '/';
+  /** Route implementation. */
+  // paths referenced in the route.
+  var path = system.config.route.root + 'home';
 
-  HomeViewModel.prototype.init = function(context) {
-    app.renderView(app.tmpl.home);
-    app.base(this, 'init', context);
-  };
+  // route handler.
+  var route = system.router.get(path, function(context) {
 
-  return HomeViewModel;
+    system.logger.debug('ROUTE:', path);
+
+    system.viewmodel.set('loading', true);
+    system.renderView(system.tmpl.home());
+
+  });
+
+  return route;
 });

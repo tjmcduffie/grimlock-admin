@@ -1,24 +1,26 @@
 /*global define */
 /**
- * @fileoverview Root route.
+ * @fileoverview Profile route.
  */
 
 define(function(require) {
 
   /** requirements */
+  var UserModel = require('grimlock/models/user');
   var system = require('grimlock/system');
 
 
 
   /** Route implementation. */
   // paths referenced in the route.
-  var path = system.config.route.root;
-  var homePath = system.config.route.root + 'home';
+  var path = system.config.route.root + 'profile';
 
   // route handler.
   var route = system.router.get(path, function(context) {
     system.logger.debug('ROUTE:', path);
-    context.redirect(homePath);
+
+    system.viewmodel.set('user', new UserModel());
+    // system.renderView(system.tmpl.profile());
   });
 
   return route;

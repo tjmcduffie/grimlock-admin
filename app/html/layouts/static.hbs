@@ -1,3 +1,7 @@
+{{> html-head}}
+<main>
+{{> body}}
+</main>
       {{> footer}}
     </div>
     <!--[if lt IE 7]>
@@ -6,6 +10,6 @@
     {{#is environment 'dev'}}
     <script src="http://localhost:35730/livereload.js"></script>
     {{/is}}
-    <script data-main="js/main" src="js/lib/requirejs/require.js"></script>
+    <script data-main="js/static" src="js/lib/requirejs/require.js"></script>
   </body>
 </html>

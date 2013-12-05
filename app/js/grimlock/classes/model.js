@@ -1,29 +1,40 @@
-/*global define, window */
+/*global define */
 define(function(require) {
 
   /** requirements */
-  var app = require('grimlock/app');
+  var util = require('grimlock/modules/util');
+  var system = require('grimlock/system');
 
   /** provision */
+  /**
+   * Model super class constructor.
+   */
   var Model = function() {
-    this.hydrate_ = this.hydrate_.bind(this);
+
   };
 
-  Model.prototype.primaryDataStore_ = null;
 
-  Model.prototype.secondaryDataStore_ = null;
+  /**
+   * Deferred object implementing the promises/A+ spec.
+   * http://promises-aplus.github.io/promises-spec/
+   * @type {Object}
+   * @private
+   */
+  Model.prototype.deferred_ = system.promise.defer();
 
-  Model.prototype.hydrate_ = function() {
-    throw new Error('An Abstract method cannot be implemented directly');
-  };
 
-  Model.prototype.dehydrate_ = function() {
-    throw new Error('An Abstract method cannot be implemented directly');
-  };
+  /**
+   * Abstract method that needs to be overridden in child classes
+   * @type {function}
+   */
+  Model.prototype.setData_ = util.abstractMethod;
 
-  Model.prototype.loadData_ = function() {
-    throw new Error('An Abstract method cannot be implemented directly');
-  };
+
+  /**
+   * Abstract method that needs to be overridden in child classes
+   * @type {function}
+   */
+  Model.prototype.hydrate = util.abstractMethod;
 
   return Model;
 

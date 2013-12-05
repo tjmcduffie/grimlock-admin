@@ -1,29 +1,23 @@
-// to depend on a bower installed component:
-// define(['component/componentName/file'])
+/*global define, window */
+/**
+ * @fileoverview Application instantiation file. It instantiates the
+ *     application and assigns it to a global variable if available.
+ */
 
 define(function(require) {
 
-  /** requirements */
-  var c = require('config');
-  var app = require('grimlock/app');
-  var LIN = require('grimlock/linkedin');
-  var routes = require('grimlock/routes');
+  /** Requirements */
+  var App = require('grimlock/app');
+  var config = require('config'); // need to load config here so requirejs can
+                                  // be configured with the right paths.
 
-  if (!window.IN) {
-    throw new Error('LinkedIn API not loaded');
+  var grimlock = new App();
+
+  // assign to the global namespace.
+  if (window !== undefined) {
+    window['GRMLCK'] = grimlock;
+  } else {
+    GRMLCK = grimlock;
   }
 
-  /** provision */
-  window.app = app;
-  window.startApp = function() {
-    console.log('starting App');
-    routes.register();
-    app.start();
-  };
-
-  window.IN.init({
-    api_key: app.config.IN.API_KEY,
-    onLoad: 'window.startApp',
-    authorize: app.config.IN.AUTHORIZE
-  });
 });

@@ -14,7 +14,8 @@ module.exports = function(grunt) {
     temp: 'temp',
     test: 'test',
     vendor: 'components',
-    port: 8000
+    port: 8000,
+    livereloadPort: 35730
   };
 
   // Project configuration.
@@ -36,7 +37,18 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>/html/pages',
-          src: ['*.hbs'],
+          src: ['*.hbs', '!static.hbs'],
+          dest: '<%= yeoman.temp %>'
+        }]
+      },
+      stat: {
+        options: {
+          layout: '<%= yeoman.app %>/html/layouts/static.hbs'
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/html/pages',
+          src: ['static.hbs'],
           dest: '<%= yeoman.temp %>'
         }]
       }
@@ -138,7 +150,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '<%= yeoman.vendor %>',
             src: [
-              '*/{require,modernizr,handlebars}.js',
+              '*/{require,modernizr,handlebars,q}.js',
               '*/jquery.*js'
             ],
             dest: '<%= yeoman.temp %>/js/lib'
@@ -230,7 +242,7 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          livereload: true
+          livereload: yeomanConfig.livereloadPort,
         },
         files: [
           '<%= yeoman.temp %>/{,*/}*.html',
@@ -241,13 +253,13 @@ module.exports = function(grunt) {
       },
       assemble: {
         files: [
-          '<%= yeoman.app %>/html/{pages,data}/*.{hbs,json}'
+          '<%= yeoman.app %>/html/**/*.{hbs,json}'
         ],
         tasks: ['assemble']
       },
       handlebars: {
-        files: ['<%= yeoman.app %>/html/templates/*.hbs'],
-        task: ['handlebars']
+        files: ['<%= yeoman.app %>/html/partials/{,**/}*.hbs'],
+        tasks: ['handlebars']
       }
     }
   });

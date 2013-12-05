@@ -1,26 +1,27 @@
 /*global define */
+/**
+ * @fileoverview Sync route.
+ */
+
 define(function(require) {
 
   /** requirements */
-  var app = require('grimlock/app');
-  var ViewModel = require('grimlock/viewmodel');
+  var UserModel = require('grimlock/models/user');
+  var system = require('grimlock/system');
 
-  /** provision */
-  var SyncViewModel = function SyncViewModel() {
-    app.base(this);
-  };
-  app.inherits(SyncViewModel, ViewModel);
 
-  SyncViewModel.prototype.method = 'get';
 
-  SyncViewModel.prototype.path = '/sync';
+  /** Route implementation. */
+  // paths referenced in the route.
+  var path = system.config.route.root + 'sync';
 
-  SyncViewModel.prototype.view = 'sync';
+  // route handler.
+  var route = system.router.get(path, function(context) {
+    system.logger.debug('ROUTE:', path);
 
-  SyncViewModel.prototype.init = function(context) {
-    app.renderView(app.tmpl.sync);
-    app.base(this, 'init', context);
-  };
+    system.viewmodel.set('user', new UserModel());
+    system.renderView(system.tmpl.sync());
+  });
 
-  return SyncViewModel;
+  return route;
 });

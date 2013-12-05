@@ -2,8 +2,8 @@
 define(function(require) {
 
   /** requirements */
-  var util = require('grimlock/util');
-  var DataStore = require('grimlock/datastore');
+  var util = require('grimlock/modules/util');
+  var DataStore = require('grimlock/classes/datastore');
 
   /** provision */
   var LinkedInDataStore = function() {
