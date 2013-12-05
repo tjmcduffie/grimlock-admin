@@ -1,4 +1,9 @@
 /*global define */
+/**
+ * @fileoverview Utility module. Defines some base functions for function
+ *     binding and inheritence.
+ */
+
 define([], function() {
 
   /**
@@ -193,9 +198,30 @@ define([], function() {
     }
   };
 
+  /**
+   * When defining a class Foo with an abstract method bar(), you can do:
+   *
+   * Foo.prototype.bar = goog.abstractMethod
+   *
+   * Now if a subclass of Foo fails to override bar(), an error
+   * will be thrown when bar() is invoked.
+   *
+   * Note: This does not take the name of the function to override as
+   * an argument because that would make it more difficult to obfuscate
+   * our JavaScript code.
+   *
+   * @type {!Function}
+   * @throws {Error} when invoked to indicate the method should be
+   *   overridden.
+   */
+  var abstractMethod = function() {
+    throw Error('unimplemented abstract method');
+  };
+
   return {
     base: base,
     bind: bind,
-    inherits: inherits
+    inherits: inherits,
+    abstractMethod: abstractMethod
   };
 });

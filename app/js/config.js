@@ -1,42 +1,16 @@
-require.config({
-  // make components more sensible
-  // expose jquery
-  paths: {
-    'lib/jquery': 'lib/jquery/jquery',
-    'lib/ko': 'lib/knockout/knockout-latest',
-    // 'lib/handlebars': 'lib/handlebars/handlebars',
-    'handlebars': 'lib/handlebars/handlebars', // keep this for the templates file
-    'lib/router': 'lib/sammy/sammy',
-    'api/linkedin': 'http://platform.linkedin.com/in.js?async=true'
-  },
+/*global define, require */
+/**
+ * @fileoverview Application configuration file. Configures the application and
+ *     requirejs.
+ */
 
-  shim: {
-    'lib/router': {
-      deps: ['lib/jquery'],
-      exports: 'Sammy'
-    },
-    'lib/jquery': {
-      exports: 'jQuery'
-    },
-    'handlebars': {
-      exports: 'Handlebars'
-    },
-    'api/linkedin': {
-      exports: 'IN'
-    }
-  }
-});
 
-// Use the debug version of knockout it development only
-// When compiling with grunt require js will only look at the first
-// require.config({}) found in this file
-require.config({
-  paths: {
-    'lib/ko': 'lib/knockout/knockout-latest.debug'
-  }
-});
+/**
+ * Application configuration module. Returns the configuration object.
+ * @return {[type]} [description]
+ */
+define('config', [], function() {
 
-define('appconfig', ['lib/router'], function(router) {
   return {
     Analytics: {
       UAID: 'UA-XXXXX-X'
@@ -46,14 +20,67 @@ define('appconfig', ['lib/router'], function(router) {
       AUTHORIZE: true
     },
     route: {
-      methods: {
-        DELETE: router.del,
-        GET: router.get,
-        POST: router.post,
-        PUT: router.pot,
-        UPDATE: router.update
-      },
       root: '#/'
+    },
+    debugLevel: {
+      prod: ['error', 'warn'],
+      dev: ['error', 'warn', 'info', 'debug']
+    },
+    DOM: {
+      viewContainer: 'main'
+    },
+    isProd: function() {
+      // TODO: add logic for detecting Prod
+      return false;
     }
   };
+
+});
+
+
+/**
+ * Requirejs default configuration.
+ */
+require.config({
+  // make components more sensible
+  // expose jquery
+  paths: {
+    'handlebars': 'lib/handlebars/handlebars', // keep this for the templates file
+    'jquery': 'lib/jquery/jquery',
+    'knockout': 'lib/knockout/knockout-latest',
+    'linkedinapi': 'http://platform.linkedin.com/in.js?async=true',
+    'sammy': 'lib/sammy/sammy',
+    'q': 'lib/q/q',
+  },
+
+  shim: {
+    'handlebars': {
+      exports: 'Handlebars'
+    },
+    'jquery': {
+      exports: 'jQuery'
+    },
+    'linkedinapi': {
+      exports: 'IN'
+    },
+    'sammy': {
+      deps: ['jquery'],
+      exports: 'Sammy'
+    },
+    'q': {
+      exports: 'Q'
+    }
+  }
+});
+
+
+/**
+ * Requirejs debug configuration.
+ * Registers debug versions of files during development only. During build Grunt
+ * will only look at the first require.config method.
+ */
+require.config({
+  paths: {
+    'ko': 'lib/knockout/knockout-latest.debug'
+  }
 });
