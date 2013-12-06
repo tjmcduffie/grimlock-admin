@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     test: 'test',
     vendor: 'components',
     port: 8000,
-    livereloadPort: 35730
+    livereloadPort: 8001
   };
 
   // Project configuration.
