@@ -21,48 +21,40 @@ build and run this app, such as [grunt](http://gruntjs.com),
 
 ## Running the server
 
-You can run your app using `grunt preview`. This will start a
-server on `localhost:8000`, meaning you can simply go to the
-url [localhost:8000/index.htm](http://localhost:8000/index.htm)
-while it's running.
+You can run the app using `grunt server`. This will start a
+server on `localhost:8000`, and open the URL automatically in your default
+browser.
 
-If you'd like to run the compiled version, run
-`grunt preview-live`.
+@TODO
+Optional flags may be passed to the `grunt sever` command. If no flags are
+passed the server will run in dev mode - with uncompiled scripts, and browsable
+directories. Other environments may be accessed with the following commands:
+`grunt sever:dev` (default)
+`grunt sever:cert`
+`grunt sever:prod`
+
 
 ## Building the application
 
+@TODO
 This application uses requirejs to load the various modules in
 the app folder. However, upon build, all of these files are
 concatenated and minified together to create a small, compressed
 javascript file.
 
+@TODO - will probably have a build specific task, `grunt build` or similar. All
+        assets wil be published to the `/dist/` dir. CSS & JS will get version
+        numbers in the file names to help prevent any caching issues with future
+        versions.
 Running `grunt` by itself will run through all of the steps of
 linting the javascript, building out dependencies and ultimately
 creating `/dist/require.js`.
 
-## Working with the scaffolded app
-
-There's just enough to in place to get you going. Go ahead
-and make your changes to `index.htm`. You'll start your
-javascript work in `app/main.js` by requiring your first
-modules. Past that, well, the world is your oyster.
-
 ### Tests
 
-The test directory uses `qunit`, which is run using phantomJS
-in the console, but can also be ran by launching the server
-`grunt preview` and going to `localhost:8000/test/index.html`.
-
-Create tests in the `test/tests.js` file, where you can
-require your modules and test their functionality.
+@TODO Tesgting will happen, probably with Jasmine or QUnit
 
 ## Deploying your application on a server
 
-Assuming you're already ran `npm install` and `bower install`,
-the only pieces required to run the application in its built
-state is running `grunt`.
-
-If you're using a webserver like apache or nginx, you'll want
-to create a redirect from `/components/requirejs/require.js` to
-`/dist/require.js`. (*Note: this is exactly what `grunt
-preview-live` does*)
+@TODO 1. determine hosting environment. 2. figure out whats needed to
+deploy - scp, git clone, proprietary script, etc. 3. profit.
