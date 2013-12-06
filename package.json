@@ -5,19 +5,11 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-    "test": "grunt qunit"
-  },
   "author": {
-    "name": "Author Name",
-    "email": "email@domain.com",
-    "url": "http://example.com"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
-    }
+    "name": "Tim McDuffie",
+    "email": "timothy.mcduffie@gmail.com",
+    "url": "http://www.timmcduffie.com"
+  }
   ],
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
